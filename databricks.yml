@@ -17,42 +17,36 @@ resources:
     ml_pipeline_job:
       name: "ml_pipeline_job (${bundle.target})"
       tasks:
-<<<<<<< Updated upstream
-        - task_key: run_notebook
-          existing_cluster_id: "1107-170300-ypf7zmlw"
-          notebook_task:
-            notebook_path: ./src/hello_notebook.py
-=======
         - task_key: data_ingestion
           existing_cluster_id: "1107-170300-ypf7zmlw"
           notebook_task:
-            notebook_path: ./src/1_data_ingestion
+            notebook_path: ./src/1_data_ingestion.ipynb
 
         - task_key: eda
           depends_on:
             - task_key: data_ingestion
           existing_cluster_id: "1107-170300-ypf7zmlw"
           notebook_task:
-            notebook_path: ./src/2_eda
+            notebook_path: ./src/2_eda.ipynb
 
         - task_key: feature_engineering
           depends_on:
             - task_key: eda
           existing_cluster_id: "1107-170300-ypf7zmlw"
           notebook_task:
-            notebook_path: ./src/3_feature_engineering
+            notebook_path: ./src/3_feature_engineering.ipynb
 
         - task_key: model_training
           depends_on:
             - task_key: feature_engineering
           existing_cluster_id: "1107-170300-ypf7zmlw"
           notebook_task:
-            notebook_path: ./src/4_model_training
+            notebook_path: ./src/4_model_training.ipynb
 
         - task_key: model_inference
           depends_on:
             - task_key: model_training
           existing_cluster_id: "1107-170300-ypf7zmlw"
           notebook_task:
-            notebook_path: ./src/5_model_inference
+            notebook_path: ./src/5_model_inference.ipynb
 >>>>>>> Stashed changes
