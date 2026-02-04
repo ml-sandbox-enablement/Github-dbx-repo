@@ -23,25 +23,25 @@ resources:
             - task_key: data_ingestion
           existing_cluster_id: "1107-170300-ypf7zmlw"
           notebook_task:
-            notebook_path: ./src/2_eda.py
+            notebook_path: ./src/2_eda.ipynb
 
         - task_key: feature_engineering
           depends_on:
             - task_key: eda
           existing_cluster_id: "1107-170300-ypf7zmlw"
           notebook_task:
-            notebook_path: ./src/3_feature_engineering.py
+            notebook_path: ./src/3_feature_engineering.ipynb
 
         - task_key: model_training
           depends_on:
             - task_key: feature_engineering
           existing_cluster_id: "1107-170300-ypf7zmlw"
           notebook_task:
-            notebook_path: ./src/4_model_training.py
+            notebook_path: ./src/4_model_training.ipynb
 
         - task_key: model_inference
           depends_on:
             - task_key: model_training
           existing_cluster_id: "1107-170300-ypf7zmlw"
           notebook_task:
-            notebook_path: ./src/5_model_inference.py
+            notebook_path: ./src/5_model_inference.ipynb
