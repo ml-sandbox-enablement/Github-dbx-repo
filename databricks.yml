@@ -12,36 +12,63 @@ resources:
   jobs:
     ml_pipeline_job:
       name: "ml_pipeline_job (${bundle.target})"
+
+      job_clusters:
+        - job_cluster_key: ml_job_cluster
+          new_cluster:
+            spark_version: "16.4.x-scala2.12"
+            node_type_id: "r6id.xlarge"
+            policy_id: "9C63D8C504000518"
+            autoscale:
+              min_workers: 2
+              max_workers: 4
+            autotermination_minutes: 20
+
       tasks:
         - task_key: data_ingestion
-          existing_cluster_id: "1107-170300-ypf7zmlw"
+          job_cluster_key: ml_job_cluster
+          libraries:
+            - pypi:
+                package: databricks-feature-engineering
           notebook_task:
             notebook_path: ./src/1_data_ingestion.ipynb
 
         - task_key: eda
           depends_on:
             - task_key: data_ingestion
-          existing_cluster_id: "1107-170300-ypf7zmlw"
+          job_cluster_key: ml_job_cluster
+          libraries:
+            - pypi:
+                package: databricks-feature-engineering
           notebook_task:
             notebook_path: ./src/2_eda.ipynb
 
         - task_key: feature_engineering
           depends_on:
             - task_key: eda
-          existing_cluster_id: "1107-170300-ypf7zmlw"
+          job_cluster_key: ml_job_cluster
+          libraries:
+            - pypi:
+                package: databricks-feature-engineering
           notebook_task:
             notebook_path: ./src/3_feature_engineering.ipynb
 
         - task_key: model_training
           depends_on:
             - task_key: feature_engineering
-          existing_cluster_id: "1107-170300-ypf7zmlw"
+          job_cluster_key: ml_job_cluster
+          libraries:
+            - pypi:
+                package: databricks-feature-engineering
           notebook_task:
             notebook_path: ./src/4_model_training.ipynb
 
         - task_key: model_inference
           depends_on:
             - task_key: model_training
-          existing_cluster_id: "1107-170300-ypf7zmlw"
+          job_cluster_key: ml_job_cluster
+          libraries:
+            - pypi:
+                package: databricks-feature-engineering
           notebook_task:
             notebook_path: ./src/5_model_inference.ipynb
