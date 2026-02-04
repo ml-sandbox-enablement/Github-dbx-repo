@@ -15,9 +15,6 @@ resources:
       tasks:
         - task_key: data_ingestion
           existing_cluster_id: "1107-170300-ypf7zmlw"
-          libraries:
-            - pypi:
-                package: databricks-feature-engineering
           notebook_task:
             notebook_path: ./src/1_data_ingestion.ipynb
 
@@ -25,9 +22,6 @@ resources:
           depends_on:
             - task_key: data_ingestion
           existing_cluster_id: "1107-170300-ypf7zmlw"
-          libraries:
-            - pypi:
-                package: databricks-feature-engineering
           notebook_task:
             notebook_path: ./src/2_eda.ipynb
 
@@ -35,9 +29,6 @@ resources:
           depends_on:
             - task_key: eda
           existing_cluster_id: "1107-170300-ypf7zmlw"
-          libraries:
-            - pypi:
-                package: databricks-feature-engineering
           notebook_task:
             notebook_path: ./src/3_feature_engineering.ipynb
 
@@ -45,9 +36,6 @@ resources:
           depends_on:
             - task_key: feature_engineering
           existing_cluster_id: "1107-170300-ypf7zmlw"
-          libraries:
-            - pypi:
-                package: databricks-feature-engineering
           notebook_task:
             notebook_path: ./src/4_model_training.ipynb
 
@@ -55,8 +43,5 @@ resources:
           depends_on:
             - task_key: model_training
           existing_cluster_id: "1107-170300-ypf7zmlw"
-          libraries:
-            - pypi:
-                package: databricks-feature-engineering
           notebook_task:
             notebook_path: ./src/5_model_inference.ipynb
