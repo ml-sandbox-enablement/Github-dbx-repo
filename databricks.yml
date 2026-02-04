@@ -16,7 +16,7 @@ resources:
         - task_key: data_ingestion
           existing_cluster_id: "1107-170300-ypf7zmlw"
           notebook_task:
-            notebook_path: ./src/1_data_ingestion.py
+            notebook_path: ./src/1_data_ingestion.ipynb
 
         - task_key: eda
           depends_on:
